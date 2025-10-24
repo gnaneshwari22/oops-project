@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Patient Management System</h1>
+            <p class="subtitle">Comprehensive Healthcare Management Platform</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="tab-btn" onclick="showTab('patients')">Patients</button>
+            <button class="tab-btn" onclick="showTab('doctors')">Doctors</button>
+            <button class="tab-btn" onclick="showTab('appointments')">Appointments</button>
+            <button class="tab-btn" onclick="showTab('billing')">Billing</button>
+        </nav>
+
+        <div id="dashboard" class="tab-content active">
+            <h2>Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Patients</h3>
+                    <p class="stat-number" id="totalPatients">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Critical Patients</h3>
+                    <p class="stat-number critical" id="criticalPatients">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Doctors</h3>
+                    <p class="stat-number" id="totalDoctors">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Appointments</h3>
+                    <p class="stat-number" id="totalAppointments">0</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Critical Patients</h3>
+                <div id="criticalPatientsList" class="data-list"></div>
+            </div>
+
+            <div class="section">
+                <h3>Recent Appointments</h3>
+                <div id="recentAppointments" class="data-list"></div>
+            </div>
+        </div>
+
+        <div id="patients" class="tab-content">
+            <h2>Patient Management</h2>
+            
+            <div class="form-card">
+                <h3>Register New Patient</h3>
+                <form id="patientForm">
+                    <div class="form-row">
+                        <input type="text" id="patientName" placeholder="Full Name" required>
+                        <input type="number" id="patientAge" placeholder="Age" required>
+                    </div>
+                    <div class="form-row">
+                        <select id="patientGender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <select id="patientBloodGroup" required>
+                            <option value="">Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="tel" id="patientContact" placeholder="Contact Number" required>
+                        <input type="text" id="patientAddress" placeholder="Address" required>
+                    </div>
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="patientCritical">
+                            Mark as Critical
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">Register Patient</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <h3>All Patients</h3>
+                <div id="patientsList" class="data-list"></div>
+            </div>
+        </div>
+
+        <div id="doctors" class="tab-content">
+            <h2>Doctor Management</h2>
+            
+            <div class="form-card">
+                <h3>Register New Doctor</h3>
+                <form id="doctorForm">
+                    <div class="form-row">
+                        <input type="text" id="doctorName" placeholder="Full Name" required>
+                        <input type="text" id="doctorSpecialization" placeholder="Specialization" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="doctorDepartment" placeholder="Department" required>
+                        <input type="tel" id="doctorContact" placeholder="Contact Number" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" id="doctorEmail" placeholder="Email" required>
+                        <input type="number" id="doctorExperience" placeholder="Experience (years)" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="doctorFee" placeholder="Consultation Fee" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Register Doctor</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <h3>All Doctors</h3>
+                <div id="doctorsList" class="data-list"></div>
+            </div>
+        </div>
+
+        <div id="appointments" class="tab-content">
+            <h2>Appointment Management</h2>
+            
+            <div class="form-card">
+                <h3>Book New Appointment</h3>
+                <form id="appointmentForm">
+                    <div class="form-row">
+                        <select id="appointmentPatient" required>
+                            <option value="">Select Patient</option>
+                        </select>
+                        <select id="appointmentDoctor" required>
+                            <option value="">Select Doctor</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <input type="date" id="appointmentDate" required>
+                        <select id="appointmentTimeSlot" required>
+                            <option value="">Select Time Slot</option>
+                            <option value="09:00-10:00">09:00 - 10:00</option>
+                            <option value="10:00-11:00">10:00 - 11:00</option>
+                            <option value="11:00-12:00">11:00 - 12:00</option>
+                            <option value="14:00-15:00">14:00 - 15:00</option>
+                            <option value="15:00-16:00">15:00 - 16:00</option>
+                            <option value="16:00-17:00">16:00 - 17:00</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <textarea id="appointmentSymptoms" placeholder="Symptoms" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Book Appointment</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <h3>All Appointments</h3>
+                <div id="appointmentsList" class="data-list"></div>
+            </div>
+        </div>
+
+        <div id="billing" class="tab-content">
+            <h2>Billing System</h2>
+            
+            <div class="form-card">
+                <h3>Calculate Bill</h3>
+                <form id="billingForm">
+                    <div class="form-row">
+                        <input type="number" id="billBaseFee" placeholder="Base Fee" step="0.01" required>
+                        <select id="billType" required onchange="toggleBillingFields()">
+                            <option value="">Select Billing Type</option>
+                            <option value="cash">Cash</option>
+                            <option value="insurance">Insurance</option>
+                        </select>
+                    </div>
+                    <div id="cashFields" style="display:none;">
+                        <div class="form-row">
+                            <input type="number" id="billDiscount" placeholder="Discount %" step="0.01" value="0">
+                        </div>
+                    </div>
+                    <div id="insuranceFields" style="display:none;">
+                        <div class="form-row">
+                            <input type="text" id="billProvider" placeholder="Insurance Provider">
+                            <input type="text" id="billPolicyNumber" placeholder="Policy Number">
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="billCoverage" placeholder="Coverage %" step="0.01">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Calculate Bill</button>
+                </form>
+            </div>
+
+            <div id="billingResult" class="section" style="display:none;">
+                <h3>Billing Details</h3>
+                <pre id="billingDetails"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
